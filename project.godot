@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "LinearPlatformControl",
+"language": "GDScript",
+"path": "res://level_components/LinearPlatformControl.gd"
+}, {
+"base": "Node2D",
+"class": "MovingPlatform",
+"language": "GDScript",
+"path": "res://level_components/MovingPlatform.gd"
+} ]
+_global_script_class_icons={
+"LinearPlatformControl": "",
+"MovingPlatform": ""
+}
+
+[application]
+
+config/name="joined_together"
+run/main_scene="res://levels/main_levels/level_one.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=640
+window/size/height=480
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="static_level"
+2d_physics/layer_3="dynamic_level"
+2d_physics/layer_4="Areas"
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"

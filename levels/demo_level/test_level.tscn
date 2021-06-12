@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://level_components/player_sprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://level_components/red_block_tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://level_components/MovingPlatform.gd" type="Script" id=3]
+[ext_resource path="res://levels/demo_level/platformA.gd" type="Script" id=4]
+[ext_resource path="res://level_components/TempTilemap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/demo_level/platform2.gd" type="Script" id=6]
+[ext_resource path="res://levels/demo_level/elevator.gd" type="Script" id=7]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 2
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 65551, 0, 0, 65552, 0, 0, 131087, 0, 0, 131088, 0, 0, 196623, 0, 0, 196624, 0, 0, 262159, 0, 0, 262160, 0, 0, 262173, 0, 0, 327692, 0, 0, 327695, 0, 0, 327696, 0, 0, 327709, 0, 0, 393228, 0, 0, 393231, 0, 0, 393232, 0, 0, 393245, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458781, 0, 0, 524300, 0, 0, 524317, 0, 0, 589836, 0, 0, 589853, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655389, 0, 0, 720925, 0, 0, 786460, 0, 0, 786461, 0, 0, 851996, 0, 0, 917524, 0, 0, 917525, 0, 0, 917527, 0, 0, 917528, 0, 0, 917529, 0, 0, 917530, 0, 0, 917531, 0, 0, 917532, 0, 0, 983059, 0, 0, 983060, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 0, 0 )
+
+[node name="MovingPlatform" type="Node2D" parent="."]
+position = Vector2( 256, 208 )
+script = ExtResource( 3 )
+
+[node name="controller" type="Node" parent="MovingPlatform"]
+script = ExtResource( 4 )
+
+[node name="TileMap2" parent="MovingPlatform" instance=ExtResource( 5 )]
+position = Vector2( 0, 16 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0 )
+
+[node name="Elevator" type="Node2D" parent="."]
+position = Vector2( 456, 528 )
+script = ExtResource( 3 )
+
+[node name="Node" type="Node" parent="Elevator"]
+script = ExtResource( 7 )
+
+[node name="TileMap2" parent="Elevator" instance=ExtResource( 5 )]
+position = Vector2( -8, 16 )
+tile_data = PoolIntArray( -65550, 0, 0, -65549, 0, 0, -65548, 0, 0, -65547, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0 )
+
+[node name="MovingPlatform2" type="Node2D" parent="."]
+position = Vector2( 696, 304 )
+script = ExtResource( 3 )
+
+[node name="controller" type="Node" parent="MovingPlatform2"]
+script = ExtResource( 6 )
+
+[node name="TileMap2" parent="MovingPlatform2" instance=ExtResource( 5 )]
+position = Vector2( 8, 16 )
+tile_data = PoolIntArray( -262144, 0, 0, -196608, 0, 0, -131072, 0, 0, -65536, 0, 0, 0, 0, 0 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 56, 208 )
+offset_origin = Vector2( 34, 208 )
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="update_position"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="update_position"]
+[connection signal="moved" from="KinematicBody2D" to="Elevator" method="update_position"]
