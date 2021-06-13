@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level_components/player_animation.tres" type="SpriteFrames" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" parent="." instance=ExtResource( 2 )]
+
+[node name="MainTilemap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 131081, 11, 0, 262151, 4, 2, 262155, 8, 0, 327686, 7, 4, 327689, 6, 0, 327690, 6, 2, 327691, 6, 65537, 393220, 7, 3, 393221, 7, 5, 393223, 1, 0, 393224, 1, 1, 393225, 1, 1, 393226, 1, 1, 393227, 1, 1, 393228, 1, 1, 393229, 1, 2, 458758, 1, 0, 458759, 1, 65540, 458760, 1, 65537, 458761, 1, 65537, 458762, 1, 65537, 458763, 1, 65537, 458764, 1, 65537, 458765, 1, 0, 458766, 1, 196610, 524292, 1, 0, 524293, 1, 1, 524294, 1, 65540, 524295, 1, 65537, 524296, 1, 65537, 524297, 1, 65537, 524298, 1, 65537, 524299, 1, 65537, 524300, 1, 131076, 524301, 1, 131074, 589828, 1, 131072, 589829, 1, 196612, 589830, 1, 131076, 589831, 1, 131073, 589832, 1, 196612, 589833, 1, 65537, 589834, 1, 65537, 589835, 1, 131076, 589836, 1, 131074, 655365, 1, 131072, 655366, 1, 131074, 655368, 1, 131072, 655369, 1, 131073, 655370, 1, 131073, 655371, 1, 131074 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 288, 176 )
+frames = ExtResource( 3 )
+animation = "standing"

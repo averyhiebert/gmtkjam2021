@@ -8,7 +8,7 @@ const COYOTE_THRESHOLD = 150 #milliseconds
 const JUMP_TIMEOUT = 300
 # Bump sound effect stuff
 const BUMP_THRESHOLD = 100
-const BUMP_TIMEOUT = 500
+const BUMP_TIMEOUT = 250
 
 var velocity = Vector2(0,0)
 

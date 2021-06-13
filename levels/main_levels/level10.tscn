@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://level_components/MovingPlatform.gd" type="Script" id=5]
 [ext_resource path="res://level_components/PlatformTilemap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://level_components/DeathZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://level_components/LevelExit.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/end_card.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 402, 186 )
@@ -75,7 +77,12 @@ polygon = PoolVector2Array( -144, -16, -112, -16, -112, -8, -144, -8 )
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MovingPlatform2/DeathZone"]
 polygon = PoolVector2Array( -112, -120, -80, -120, -80, -152, -48, -152, -48, -144, -48, -112, -112, -112 )
 
+[node name="LevelExit" parent="MovingPlatform2" instance=ExtResource( 8 )]
+position = Vector2( 48, -304 )
+target = ExtResource( 9 )
+delay = 2.0
+
 [node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 432 )
-[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]

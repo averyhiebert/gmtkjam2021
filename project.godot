@@ -30,6 +30,10 @@ config/name="joined_together"
 run/main_scene="res://levels/main_levels/level1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://level_components/global.gd"
+
 [display]
 
 window/size/width=640
