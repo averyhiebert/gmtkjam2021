@@ -22,7 +22,7 @@ func start_sound():
 	add_child(music_player)
 	
 	var tween = Tween.new()
-	tween.interpolate_property(music_player, "volume_db", -80, -20, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(music_player, "volume_db", -80, -10, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	add_child(tween)
 	tween.start()
 	music_player.play()
@@ -41,6 +41,11 @@ func lock_in_pickups():
 		if cat_status[cat] == statuses.MAYBE:
 			cat_status[cat] = statuses.YES
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func reset_everything():
+	cat_status = {
+	"Alice":statuses.NO,
+	"Bob":statuses.NO,
+	"Charlie":statuses.NO,
+	"":statuses.YES,
+	}
+	

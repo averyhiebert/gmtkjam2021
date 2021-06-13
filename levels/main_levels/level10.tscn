@@ -61,7 +61,7 @@ polygon = PoolVector2Array( -112, -280, -96, -280, -80, -280, -80, -272, -112, -
 
 [node name="Cat" parent="MovingPlatform/DeathZone" instance=ExtResource( 10 )]
 position = Vector2( -60, -224 )
-frame = 1
+frame = 0
 cat_name = "Alice"
 
 [node name="MovingPlatform2" type="Node2D" parent="."]
@@ -86,9 +86,9 @@ polygon = PoolVector2Array( -112, -120, -80, -120, -80, -152, -48, -152, -48, -1
 [node name="LevelExit" parent="MovingPlatform2" instance=ExtResource( 8 )]
 position = Vector2( 48, -304 )
 target = ExtResource( 9 )
-delay = 0.7
+delay = 2.0
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 432 )
-[connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
