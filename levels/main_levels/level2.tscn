@@ -6,8 +6,9 @@
 [ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=4]
 [ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://level_components/player_sprite.tscn" type="PackedScene" id=6]
-[ext_resource path="res://levels/main_levels/level_three.tscn" type="PackedScene" id=7]
+[ext_resource path="res://levels/main_levels/level3.tscn" type="PackedScene" id=7]
 [ext_resource path="res://level_components/LevelExit.tscn" type="PackedScene" id=8]
+
 
 [node name="Node2D" type="Node2D"]
 

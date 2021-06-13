@@ -13,6 +13,9 @@ var velocity = Vector2(0,0)
 var time_last_on_ground
 var time_last_jumped
 
+# Custom "on floor" tag ignoring invisible pseudo-obstacles (i.e. StaticBody2D)
+var really_on_floor = true
+
 var dying = false
 
 signal moved(offset)
@@ -40,24 +43,27 @@ func _physics_process(delta):
 			# (Otherwise, weird things happen when hitting a ceiling)
 			velocity.y = 0
 		velocity.y += delta * GRAVITY
-		if not coyote_time() and not dying:
-			$AnimatedSprite.animation = "flailing"
-	else:
-		time_last_on_ground = OS.get_ticks_msec() 
+		really_on_floor = false
+	else: 
 		velocity.y = 0
+		if really_on_floor:
+			time_last_on_ground = OS.get_ticks_msec()
+		
+	if not (really_on_floor or coyote_time() or dying):
+		$AnimatedSprite.animation = "flailing"
 		
 	# Key input
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -WALK_SPEED
-		if is_on_floor() and not dying:
+		if really_on_floor and not dying:
 			$AnimatedSprite.animation = "run_right"
 	elif Input.is_action_pressed("ui_right"):
 		velocity.x =  WALK_SPEED
-		if is_on_floor() and not dying:
+		if really_on_floor and not dying:
 			$AnimatedSprite.animation = "run_right"
 	else:
 		velocity.x = 0
-		if is_on_floor() and not dying:
+		if really_on_floor and not dying:
 			$AnimatedSprite.animation = "standing"
 	
 	# Jump controls and animations
@@ -68,9 +74,20 @@ func _physics_process(delta):
 	# warning-ignore:return_value_discarded
 	move_and_slide(velocity,Vector2(0,-1))
 	emit_signal("moved",global_position)
+	
+	# Update really_on_floor tag
+	if not is_on_floor():
+		really_on_floor = false
+	elif get_slide_count() > 0:
+		really_on_floor = false
+		for i in get_slide_count():
+			var collision = get_slide_collision(i)
+			if collision.collider.get_class() != "StaticBody2D":
+				really_on_floor = true
+				break
 
 func can_jump():
-	return (is_on_floor() or coyote_time()) and (OS.get_ticks_msec() - time_last_jumped) > JUMP_TIMEOUT
+	return coyote_time() and (OS.get_ticks_msec() - time_last_jumped) > JUMP_TIMEOUT
 
 func die():
 	dying = true

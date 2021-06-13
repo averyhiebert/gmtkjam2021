@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://level_components/player_sprite.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://level_components/LinearPlatformControl.gd" type="Script" id=4]
+[ext_resource path="res://level_components/MovingPlatform.gd" type="Script" id=5]
+[ext_resource path="res://level_components/PlatformTilemap.tscn" type="PackedScene" id=6]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" parent="." instance=ExtResource( 3 )]
+
+[node name="MainTilemap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 65535, 1, 3, 20, 1, 3, 131071, 1, 65539, 65541, 5, 0, 65556, 1, 65539, 196607, 1, 65539, 131077, 5, 0, 131092, 1, 65539, 262143, 1, 65539, 196613, 5, 0, 196628, 1, 65539, 327679, 1, 65539, 262149, 5, 0, 262164, 1, 65539, 393215, 1, 65539, 327700, 1, 65539, 458751, 1, 65539, 393236, 1, 65539, 524287, 1, 65539, 458772, 1, 65539, 589823, 1, 65539, 524308, 1, 65539, 655359, 1, 65539, 589824, 8, 0, 589844, 1, 65539, 720895, 1, 65539, 655364, 7, 5, 655365, 7, 3, 655366, 7, 1, 655378, 8, 0, 655380, 1, 65539, 786431, 1, 0, 720896, 1, 1, 720897, 1, 2, 720898, 6, 1, 720916, 1, 65539, 851967, 1, 65536, 786432, 1, 65537, 786433, 1, 4, 786434, 1, 1, 786435, 1, 1, 786436, 1, 1, 786437, 1, 1, 786438, 1, 2, 786441, 7, 0, 786450, 1, 0, 786451, 1, 1, 786452, 1, 0, 917503, 1, 65536, 851968, 1, 65537, 851969, 1, 65537, 851970, 1, 65537, 851971, 1, 65537, 851972, 1, 65537, 851973, 1, 65537, 851974, 1, 4, 851975, 1, 2, 851980, 6, 2, 851981, 6, 65538, 851983, 6, 1, 851984, 6, 65537, 851985, 1, 0, 851986, 1, 65540, 851987, 1, 65537, 851988, 1, 65538, 983039, 1, 65536, 917504, 1, 65537, 917505, 1, 65537, 917506, 1, 65537, 917507, 1, 65537, 917508, 1, 65537, 917509, 1, 65537, 917510, 1, 65537, 917511, 1, 4, 917512, 1, 1, 917513, 1, 1, 917514, 1, 1, 917515, 1, 1, 917516, 1, 1, 917517, 1, 1, 917518, 1, 1, 917519, 1, 1, 917520, 1, 1, 917521, 1, 65540, 917522, 1, 65537, 917523, 1, 65537, 917524, 1, 65538, 1048575, 1, 131072, 983040, 1, 131073, 983041, 1, 131073, 983042, 1, 131073, 983043, 1, 131073, 983044, 1, 131073, 983045, 1, 131073, 983046, 1, 131073, 983047, 1, 131073, 983048, 1, 131073, 983049, 1, 131073, 983050, 1, 131073, 983051, 1, 131073, 983052, 1, 131073, 983053, 1, 131073, 983054, 1, 131073, 983055, 1, 131073, 983056, 1, 131073, 983057, 1, 131073, 983058, 1, 131073, 983059, 1, 131073, 983060, 1, 131074 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32, 336 )
+
+[node name="MovingPlatform" type="Node2D" parent="."]
+position = Vector2( 30, 338 )
+script = ExtResource( 5 )
+
+[node name="LinearPlatformControl" type="Node" parent="MovingPlatform"]
+script = ExtResource( 4 )
+a = -1.0
+d = -1.0
+
+[node name="PlatformTilemap" parent="MovingPlatform" instance=ExtResource( 6 )]
+position = Vector2( 2, -2 )
+tile_data = PoolIntArray( -393201, 2, 196608, -393200, 2, 196609, -393199, 2, 196610 )
+
+[node name="InvisibleObstacle" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InvisibleObstacle"]
+polygon = PoolVector2Array( 472, 338, 472, 490, 356, 490, 356, 338 )
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
