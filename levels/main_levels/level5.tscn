@@ -23,7 +23,7 @@ tile_data = PoolIntArray( -131068, 1, 196608, -131067, 1, 0, -131066, 1, 1, -131
 [node name="DeathZone" parent="." instance=ExtResource( 7 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2( 352, 706 )
+position = Vector2( 352, 774 )
 shape = SubResource( 1 )
 
 [node name="MovingPlatform" type="Node2D" parent="."]
@@ -67,6 +67,6 @@ position = Vector2( 64, 80 )
 [node name="LevelExit" parent="." instance=ExtResource( 8 )]
 position = Vector2( 576, 64 )
 target = ExtResource( 9 )
-[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform3" method="_on_KinematicBody2D_moved"]

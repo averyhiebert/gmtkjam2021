@@ -9,7 +9,6 @@
 [ext_resource path="res://levels/main_levels/level3.tscn" type="PackedScene" id=7]
 [ext_resource path="res://level_components/LevelExit.tscn" type="PackedScene" id=8]
 
-
 [node name="Node2D" type="Node2D"]
 
 [node name="ColorRect" parent="." instance=ExtResource( 4 )]

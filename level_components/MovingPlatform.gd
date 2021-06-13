@@ -3,6 +3,7 @@ extends Node2D
 class_name MovingPlatform
 
 # IMPORTANT: First child must implement function "f" which controls motion
+# IMPORTAN: Must come *BEFORE* player in update order (i.e. higher on list)
 var initial_position: Vector2
 var pos_func: Node
 

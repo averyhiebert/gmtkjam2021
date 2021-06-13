@@ -17,6 +17,7 @@ var time_last_jumped
 var really_on_floor = true
 
 var dying = false
+var do_physics = true # disable when dying by spikes
 
 signal moved(offset)
 
@@ -25,6 +26,7 @@ signal moved(offset)
 func _ready():
 	time_last_on_ground = OS.get_ticks_msec()
 	time_last_jumped = OS.get_ticks_msec()
+	emit_signal("moved",global_position)
 
 func coyote_time():
 	# Return true during "coyote time"
@@ -35,23 +37,7 @@ func _process(delta):
 	if velocity.x != 0:
 		$AnimatedSprite.flip_h = velocity.x < 0
 
-
-func _physics_process(delta):
-	# Handle falling
-	if not is_on_floor():
-		if is_on_ceiling() and velocity.y < 0:
-			# (Otherwise, weird things happen when hitting a ceiling)
-			velocity.y = 0
-		velocity.y += delta * GRAVITY
-		really_on_floor = false
-	else: 
-		velocity.y = 0
-		if really_on_floor:
-			time_last_on_ground = OS.get_ticks_msec()
-		
-	if not (really_on_floor or coyote_time() or dying):
-		$AnimatedSprite.animation = "flailing"
-		
+func handle_key_input(delta):
 	# Key input
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -WALK_SPEED
@@ -70,6 +56,27 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_up") and can_jump():
 		velocity.y =  -JUMP + delta*GRAVITY
 		time_last_jumped = OS.get_ticks_msec()
+
+func _physics_process(delta):
+	if not do_physics:
+		return
+	
+	# Handle falling
+	if not is_on_floor():
+		if is_on_ceiling() and velocity.y < 0:
+			# (Otherwise, weird things happen when hitting a ceiling)
+			velocity.y = 0
+		velocity.y += delta * GRAVITY
+		really_on_floor = false
+	else: 
+		velocity.y = 0
+		if really_on_floor:
+			time_last_on_ground = OS.get_ticks_msec()
+		
+	if not (really_on_floor or coyote_time() or dying):
+		$AnimatedSprite.animation = "flailing"
+		
+	handle_key_input(delta)
 	
 	# warning-ignore:return_value_discarded
 	move_and_slide(velocity,Vector2(0,-1))
@@ -86,11 +93,15 @@ func _physics_process(delta):
 				really_on_floor = true
 				break
 
+func disable_physics():
+	do_physics = false
+
 func can_jump():
 	return coyote_time() and (OS.get_ticks_msec() - time_last_jumped) > JUMP_TIMEOUT
 
-func die():
+func die(disable_physics=false):
 	dying = true
+	do_physics = not disable_physics
 	$AnimatedSprite.play("death")
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_tree().reload_current_scene()
