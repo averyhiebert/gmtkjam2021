@@ -1,81 +1,84 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
+[ext_resource path="res://assets/audio/decent_jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://level_components/player_sprite.gd" type="Script" id=2]
 [ext_resource path="res://assets/player_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://assets/audio/spiked.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/bumped.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
-region = Rect2( 196, 0, 28, 32 )
+region = Rect2( 108, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
-region = Rect2( 224, 0, 28, 32 )
+region = Rect2( 144, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 252, 0, 28, 32 )
+region = Rect2( 180, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 280, 0, 28, 32 )
+region = Rect2( 216, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 308, 0, 28, 32 )
+region = Rect2( 36, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 336, 0, 28, 32 )
+region = Rect2( 72, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 84, 0, 28, 32 )
+region = Rect2( 0, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 112, 0, 28, 32 )
+region = Rect2( 252, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 140, 0, 28, 32 )
+region = Rect2( 288, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 168, 0, 28, 32 )
+region = Rect2( 324, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 3 )
-region = Rect2( 28, 0, 28, 32 )
+region = Rect2( 360, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 3 )
-region = Rect2( 56, 0, 28, 32 )
+region = Rect2( 396, 0, 36, 40 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 28, 32 )
+region = Rect2( 432, 0, 36, 40 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": false,
-"name": "death",
-"speed": 12.0
-}, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "flailing",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "run_right",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 13 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "standing",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": false,
+"name": "death",
+"speed": 12.0
 } ]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -90,3 +93,15 @@ playing = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0, 4 )
 polygon = PoolVector2Array( 0, -16, 6, -16, 6, 12, -6, 12, -6, -16 )
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -20.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
+
+[node name="BumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0

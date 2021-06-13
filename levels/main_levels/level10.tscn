@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level_components/player_sprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://level_components/LinearPlatformControl.gd" type="Script" id=4]
+[ext_resource path="res://level_components/MovingPlatform.gd" type="Script" id=5]
+[ext_resource path="res://level_components/PlatformTilemap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://level_components/DeathZone.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 402, 186 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" parent="." instance=ExtResource( 2 )]
+
+[node name="MainTilemap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 65535, 1, 3, 20, 1, 3, 131071, 1, 65539, 65556, 1, 65539, 196607, 1, 65539, 131092, 1, 65539, 262143, 1, 65539, 196628, 1, 65539, 327679, 1, 65539, 262164, 1, 65539, 393215, 1, 65539, 327700, 1, 65539, 458751, 1, 65539, 393236, 1, 65539, 524287, 1, 65539, 458772, 1, 65539, 589823, 1, 65539, 524308, 1, 65539, 655359, 1, 65539, 589844, 1, 65539, 720895, 1, 65539, 655380, 1, 65539, 786431, 1, 65539, 720916, 1, 65539, 851967, 1, 65539, 786433, 8, 0, 786452, 1, 65539, 917503, 1, 65539, 851988, 1, 65539, 983039, 1, 0, 917504, 1, 196609, 917505, 1, 196609, 917506, 1, 196609, 917507, 1, 196609, 917508, 1, 196609, 917509, 1, 196609, 917510, 1, 196609, 917511, 1, 196609, 917512, 1, 196609, 917513, 1, 196609, 917514, 1, 196610, 917524, 1, 65539, 1048575, 1, 65539, 983060, 1, 65539, 1114111, 1, 65539, 1048596, 1, 65539, 1179647, 1, 65539, 1114132, 1, 65539, 1245183, 1, 65539, 1179668, 1, 65539, 1310719, 1, 65539, 1245204, 1, 65539, 1376255, 1, 65539, 1310740, 1, 65539, 1441791, 1, 65539, 1376276, 1, 65539, 1507327, 1, 65539, 1441812, 1, 65539, 1572863, 1, 65539, 1507348, 1, 65539, 1638399, 1, 65539, 1572884, 1, 65539, 1703935, 1, 131075, 1638420, 1, 131075 )
+
+[node name="DeathZone" parent="." instance=ExtResource( 7 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2( 302, 700 )
+shape = SubResource( 1 )
+
+[node name="MovingPlatform" type="Node2D" parent="."]
+position = Vector2( 272, 400 )
+script = ExtResource( 5 )
+
+[node name="LinearPlatformControl" type="Node" parent="MovingPlatform"]
+script = ExtResource( 4 )
+a = -1.0
+
+[node name="PlatformTilemap" parent="MovingPlatform" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -524291, 9, 1, -524289, 9, 1, -458755, 5, 0, -458753, 5, 0, -524288, 5, 0, -393219, 5, 0, -393217, 5, 0, -327682, 5, 0, -393211, 5, 0, -393210, 5, 0, -196609, 5, 0, -262144, 5, 0, -196603, 5, 0, -131067, 9, 65536, -65534, 9, 1, 65534, 9, 1, 1, 9, 0, 2, 5, 0, 4, 9, 0, 5, 5, 0, 6, 9, 65537, 131069, 9, 0, 131070, 5, 0, 131071, 9, 65537, 65540, 9, 0, 65541, 5, 0, 65542, 9, 65537 )
+
+[node name="DeathZone" parent="MovingPlatform" instance=ExtResource( 7 )]
+disable_physics = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( -88, 48, -88, 16, -80, 8, -48, 8, -40, 16, -40, 48 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( 40, 16, 40, -16, 48, -24, 80, -24, 80, -16, 48, 16 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( 136, -16, 144, -16, 144, -8, 176, -8, 176, -16, 184, -16, 184, 48, 136, 48 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( 144, -80, 176, -80, 176, -72, 144, -72 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( -48, -280, -16, -280, -16, -272, -48, -272 )
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( -112, -280, -96, -280, -80, -280, -80, -272, -112, -272 )
+
+[node name="MovingPlatform2" type="Node2D" parent="."]
+position = Vector2( 496, 304 )
+script = ExtResource( 5 )
+
+[node name="LinearPlatformControl" type="Node" parent="MovingPlatform2"]
+script = ExtResource( 4 )
+c = 1.0
+
+[node name="PlatformTilemap" parent="MovingPlatform2" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -655359, 8, 0, -524287, 0, 196608, -524286, 0, 196610, -262146, 9, 1, -262145, 0, 196611, -196611, 9, 1, -196610, 0, 196611, -131075, 0, 196611, -4, 0, 196611, 65532, 9, 65536, 131072, 0, 196611 )
+
+[node name="DeathZone" parent="MovingPlatform2" instance=ExtResource( 7 )]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovingPlatform2/DeathZone"]
+polygon = PoolVector2Array( -144, -16, -112, -16, -112, -8, -144, -8 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MovingPlatform2/DeathZone"]
+polygon = PoolVector2Array( -112, -120, -80, -120, -80, -152, -48, -152, -48, -144, -48, -112, -112, -112 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 64, 432 )
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]

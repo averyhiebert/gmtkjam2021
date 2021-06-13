@@ -9,6 +9,9 @@ func _ready():
 
 func level_transition(body):
 	# TODO: Nice transition effects?
-	# Wait 2 seconds before transitioning.
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.25), "timeout")
+	body.exit_level()
+	$ExitSound.play()
+	# Wait 0.5 seconds before transitioning.
+	yield(get_tree().create_timer(0.7), "timeout")
 	get_tree().change_scene_to(target)

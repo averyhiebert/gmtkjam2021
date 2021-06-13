@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/exit.wav-4536db62458b3981563cd7e28ed06e75.sample"
+
+[deps]
+
+source_file="res://assets/audio/exit.wav"
+dest_files=[ "res://.import/exit.wav-4536db62458b3981563cd7e28ed06e75.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

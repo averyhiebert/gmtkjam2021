@@ -37,7 +37,7 @@ b = -1.0
 
 [node name="PlatformTilemap" parent="MovingPlatform" instance=ExtResource( 7 )]
 position = Vector2( -16, -34 )
-tile_data = PoolIntArray( -393217, 9, 0, -458752, 5, 0, -458751, 5, 0, -458750, 5, 0, -458749, 9, 65537, -458745, 5, 0, -458744, 5, 0, -262146, 5, 0, -327675, 5, 0, -196604, 5, 0, -65534, 5, 0, 65536, 5, 0 )
+tile_data = PoolIntArray( -393217, 9, 0, -458752, 5, 0, -458751, 5, 0, -458750, 5, 0, -458749, 9, 65537, -458745, 5, 0, -458744, 5, 0, -262147, 9, 0, -262146, 5, 0, -327675, 5, 0, -131080, 5, 0, -131079, 5, 0, -131078, 5, 0, -131077, 5, 0, -131076, 5, 0, -196604, 5, 0, -65534, 5, 0, 65536, 5, 0 )
 
 [node name="DeathZone" parent="MovingPlatform" instance=ExtResource( 4 )]
 position = Vector2( -128, -386 )
@@ -45,6 +45,12 @@ disable_physics = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
 polygon = PoolVector2Array( 208, 128, 216, 128, 216, 160, 208, 160 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( 104, 128, 112, 128, 112, 160, 104, 160 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
+polygon = PoolVector2Array( 48, 192, 48, 224, 40, 224, 40, 192 )
 
 [node name="LevelExit" parent="." instance=ExtResource( 8 )]
 position = Vector2( 608, 32 )

@@ -6,12 +6,16 @@ const WALK_SPEED = 250
 const JUMP = 450
 const COYOTE_THRESHOLD = 150 #milliseconds
 const JUMP_TIMEOUT = 300
+# Bump sound effect stuff
+const BUMP_THRESHOLD = 100
+const BUMP_TIMEOUT = 500
 
 var velocity = Vector2(0,0)
 
 # Time stamps for various cooldowns
 var time_last_on_ground
 var time_last_jumped
+var time_last_bump
 
 # Custom "on floor" tag ignoring invisible pseudo-obstacles (i.e. StaticBody2D)
 var really_on_floor = true
@@ -26,6 +30,7 @@ signal moved(offset)
 func _ready():
 	time_last_on_ground = OS.get_ticks_msec()
 	time_last_jumped = OS.get_ticks_msec()
+	time_last_bump = OS.get_ticks_msec()
 	emit_signal("moved",global_position)
 
 func coyote_time():
@@ -56,6 +61,7 @@ func handle_key_input(delta):
 	if Input.is_action_pressed("ui_up") and can_jump():
 		velocity.y =  -JUMP + delta*GRAVITY
 		time_last_jumped = OS.get_ticks_msec()
+		$JumpSound.play()
 
 func _physics_process(delta):
 	if not do_physics:
@@ -65,11 +71,17 @@ func _physics_process(delta):
 	if not is_on_floor():
 		if is_on_ceiling() and velocity.y < 0:
 			# (Otherwise, weird things happen when hitting a ceiling)
+			$JumpSound.stop()
+			bump_sound()
 			velocity.y = 0
 		velocity.y += delta * GRAVITY
 		really_on_floor = false
 	else: 
-		velocity.y = 0
+		if velocity.y != 0:
+			#if abs(velocity.y) > BUMP_THRESHOLD:
+				# TODO Particles?
+				#$BumpSound.play()
+			velocity.y = 0
 		if really_on_floor:
 			time_last_on_ground = OS.get_ticks_msec()
 		
@@ -82,7 +94,14 @@ func _physics_process(delta):
 	move_and_slide(velocity,Vector2(0,-1))
 	emit_signal("moved",global_position)
 	
+	# Identify collision with invisible objects
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.get_class() == "StaticBody2D":
+			bump_sound()
+	
 	# Update really_on_floor tag
+	# TODO merge with previous.
 	if not is_on_floor():
 		really_on_floor = false
 	elif get_slide_count() > 0:
@@ -92,6 +111,12 @@ func _physics_process(delta):
 			if collision.collider.get_class() != "StaticBody2D":
 				really_on_floor = true
 				break
+
+func bump_sound():
+	var now = OS.get_ticks_msec()
+	if now - time_last_bump > BUMP_TIMEOUT:
+		$BumpSound.play()
+		time_last_bump = now
 
 func disable_physics():
 	do_physics = false
@@ -103,6 +128,13 @@ func die(disable_physics=false):
 	dying = true
 	do_physics = not disable_physics
 	$AnimatedSprite.play("death")
+	$DeathSound.play()
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_tree().reload_current_scene()
+
+func exit_level():
+	# TODO: Make a unique level-exit animation.
+	dying = true
+	do_physics = false
+	$AnimatedSprite.play("death")
 
