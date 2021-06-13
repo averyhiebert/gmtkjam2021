@@ -45,5 +45,5 @@ position = Vector2( 32, 336 )
 [node name="LevelExit" parent="." instance=ExtResource( 4 )]
 position = Vector2( 576, 416 )
 target = ExtResource( 8 )
-[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]

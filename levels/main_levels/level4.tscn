@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level_components/LinearPlatformControl.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=6]
 [ext_resource path="res://level_components/PlatformTilemap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://levels/main_levels/level5.tscn" type="PackedScene" id=8]
+[ext_resource path="res://level_components/Cat.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,8 +25,13 @@ script = ExtResource( 3 )
 script = ExtResource( 2 )
 a = -1.0
 
+[node name="Cat" parent="MovingPlatform" instance=ExtResource( 9 )]
+position = Vector2( -572, -192 )
+frame = 0
+cat_name = "Bob"
+
 [node name="PlatformTilemap" parent="MovingPlatform" instance=ExtResource( 7 )]
-tile_data = PoolIntArray( -458752, 5, 0, -327686, 6, 0, -262151, 2, 196608, -262150, 2, 196610, -131081, 4, 2, -196608, 5, 0, -65544, 6, 65536, -9, 2, 196608, -8, 2, 196609, -7, 2, 196610, 65536, 5, 0 )
+tile_data = PoolIntArray( -458752, 5, 0, -327686, 6, 0, -262162, 2, 196608, -262161, 2, 196609, -262160, 2, 196610, -262151, 2, 196608, -262150, 2, 196610, -131081, 4, 2, -196608, 5, 0, -65544, 6, 65536, -9, 2, 196608, -8, 2, 196609, -7, 2, 196610, 65536, 5, 0 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 5 )]
 position = Vector2( 64, 432 )

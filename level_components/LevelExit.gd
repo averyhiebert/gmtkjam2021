@@ -13,6 +13,7 @@ func level_transition(body):
 	yield(get_tree().create_timer(0.25), "timeout")
 	body.exit_level()
 	$ExitSound.play()
+	Global.lock_in_pickups()
 	# Wait 0.5 seconds before transitioning.
 	yield(get_tree().create_timer(delay), "timeout")
 	get_tree().change_scene_to(target)

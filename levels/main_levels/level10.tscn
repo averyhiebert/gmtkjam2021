@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level_components/BackgroundRect.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://level_components/DeathZone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://level_components/LevelExit.tscn" type="PackedScene" id=8]
 [ext_resource path="res://levels/end_card.tscn" type="PackedScene" id=9]
+[ext_resource path="res://level_components/Cat.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 402, 186 )
@@ -58,6 +59,11 @@ polygon = PoolVector2Array( -48, -280, -16, -280, -16, -272, -48, -272 )
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
 polygon = PoolVector2Array( -112, -280, -96, -280, -80, -280, -80, -272, -112, -272 )
 
+[node name="Cat" parent="MovingPlatform/DeathZone" instance=ExtResource( 10 )]
+position = Vector2( -60, -224 )
+frame = 1
+cat_name = "Alice"
+
 [node name="MovingPlatform2" type="Node2D" parent="."]
 position = Vector2( 496, 304 )
 script = ExtResource( 5 )
@@ -80,7 +86,7 @@ polygon = PoolVector2Array( -112, -120, -80, -120, -80, -152, -48, -152, -48, -1
 [node name="LevelExit" parent="MovingPlatform2" instance=ExtResource( 8 )]
 position = Vector2( 48, -304 )
 target = ExtResource( 9 )
-delay = 2.0
+delay = 0.7
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 432 )

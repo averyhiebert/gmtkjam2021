@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://level_components/StandardTilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level_components/player_sprite.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://level_components/PlatformTilemap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://level_components/LevelExit.tscn" type="PackedScene" id=8]
 [ext_resource path="res://levels/main_levels/level8.tscn" type="PackedScene" id=9]
+[ext_resource path="res://level_components/Cat.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 448, 14 )
@@ -51,6 +52,11 @@ polygon = PoolVector2Array( 104, 128, 112, 128, 112, 160, 104, 160 )
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="MovingPlatform/DeathZone"]
 polygon = PoolVector2Array( 48, 192, 48, 224, 40, 224, 40, 192 )
+
+[node name="Cat" parent="MovingPlatform" instance=ExtResource( 10 )]
+position = Vector2( -222, -146 )
+frame = 3
+cat_name = "Charlie"
 
 [node name="LevelExit" parent="." instance=ExtResource( 8 )]
 position = Vector2( 608, 32 )

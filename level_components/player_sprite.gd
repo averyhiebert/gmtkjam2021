@@ -129,6 +129,7 @@ func die(disable_physics=false):
 	do_physics = not disable_physics
 	$AnimatedSprite.play("death")
 	$DeathSound.play()
+	Global.reset_pickups()
 	yield(get_tree().create_timer(0.5), "timeout")
 	get_tree().reload_current_scene()
 
