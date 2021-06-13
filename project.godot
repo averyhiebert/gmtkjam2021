@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="joined_together"
-run/main_scene="res://levels/main_levels/level_one.tscn"
+run/main_scene="res://levels/main_levels/level1.tscn"
 config/icon="res://icon.png"
 
 [display]
