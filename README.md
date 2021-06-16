@@ -12,6 +12,12 @@ An experimental platformer made in 48 hours for the 2021 GMTK Game Jam, loosely 
  - **←/→ or a/d** to move.
  - **↑/w/[space]/[shift]** to jump
 
+## Objective:
+
+Get to the gate to move to the next level.  There are 10 levels in total.
+
+For an extra challenge, try to rescue all three cats.
+
 ## Audio Credits:
 
 The background cricket sounds are a slight modification of

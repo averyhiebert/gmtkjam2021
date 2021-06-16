@@ -8,6 +8,7 @@ var cat_status = {
 	"Alice":statuses.NO,
 	"Bob":statuses.NO,
 	"Charlie":statuses.NO,
+	"Devon":statuses.NO,
 	"":statuses.YES,
 }
 
@@ -28,8 +29,9 @@ func start_sound():
 	music_player.play()
 
 func pickup(cat):
-	if cat in cat_status and cat_status[cat] != statuses.YES:
-		cat_status[cat] = statuses.MAYBE
+	if cat in cat_status:
+		if cat_status[cat] != statuses.YES:
+			cat_status[cat] = statuses.MAYBE
 
 func reset_pickups():
 	for cat in cat_status:
@@ -37,15 +39,10 @@ func reset_pickups():
 			cat_status[cat] = statuses.NO
 
 func lock_in_pickups():
-	for cat in cat_status.keys():
+	for cat in cat_status:
 		if cat_status[cat] == statuses.MAYBE:
 			cat_status[cat] = statuses.YES
 
 func reset_everything():
-	cat_status = {
-	"Alice":statuses.NO,
-	"Bob":statuses.NO,
-	"Charlie":statuses.NO,
-	"":statuses.YES,
-	}
-	
+	for cat in cat_status:
+		cat_status[cat] = statuses.NO

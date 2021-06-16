@@ -10,6 +10,8 @@ const JUMP_TIMEOUT = 300
 const BUMP_THRESHOLD = 100
 const BUMP_TIMEOUT = 250
 
+var speed_factor = 1 # For slowing down time (i.e. accessibility option?)
+
 var velocity = Vector2(0,0)
 
 # Time stamps for various cooldowns
@@ -35,7 +37,7 @@ func _ready():
 
 func coyote_time():
 	# Return true during "coyote time"
-	return OS.get_ticks_msec() - time_last_on_ground < COYOTE_THRESHOLD
+	return (OS.get_ticks_msec() - time_last_on_ground) < COYOTE_THRESHOLD/speed_factor
 
 func _process(delta):
 	$AnimatedSprite.play()
@@ -43,6 +45,10 @@ func _process(delta):
 		$AnimatedSprite.flip_h = velocity.x < 0
 
 func handle_key_input(delta):
+	# TODO: Actually use delta properly! (I've been doing it wrong this whole time)
+	# (i.e. please multiply walk speed/jump velocity by delta, although I will also need to adjust the
+	#  hard-coded values appropriately to compensate)
+	
 	# Key input
 	if Input.is_action_pressed("ui_left"):
 		velocity.x = -WALK_SPEED
@@ -59,7 +65,7 @@ func handle_key_input(delta):
 	
 	# Jump controls and animations
 	if Input.is_action_pressed("ui_up") and can_jump():
-		velocity.y =  -JUMP + delta*GRAVITY
+		velocity.y =  -JUMP + delta * GRAVITY * speed_factor
 		time_last_jumped = OS.get_ticks_msec()
 		$JumpSound.play()
 
@@ -74,7 +80,7 @@ func _physics_process(delta):
 			$JumpSound.stop()
 			bump_sound()
 			velocity.y = 0
-		velocity.y += delta * GRAVITY
+		velocity.y += delta * GRAVITY * speed_factor
 		really_on_floor = false
 	else: 
 		if velocity.y != 0:
@@ -91,7 +97,7 @@ func _physics_process(delta):
 	handle_key_input(delta)
 	
 	# warning-ignore:return_value_discarded
-	move_and_slide(velocity,Vector2(0,-1))
+	move_and_slide(velocity * speed_factor,Vector2(0,-1))
 	emit_signal("moved",global_position)
 	
 	# Identify collision with invisible objects

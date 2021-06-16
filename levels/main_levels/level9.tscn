@@ -71,5 +71,5 @@ polygon = PoolVector2Array( 544, 344, 640, 344, 640, 352, 544, 352 )
 [node name="LevelExit" parent="." instance=ExtResource( 9 )]
 position = Vector2( 480, 320 )
 target = ExtResource( 8 )
-[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
