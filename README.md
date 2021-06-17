@@ -1,22 +1,10 @@
 # You Are A Strange World
 
-You live in a strange world that is influenced by, and influences, your
-actions, just as your brain influences your limbs and vice-versa.  We might
-wonder, then, whether "you" and "the world" are, in fact, one and the same.
-This is true in the game as well.
+An experimental platformer made in 48 hours for the 2021 GMTK Game Jam, loosely
+inspired by the theme *Joined Together*.  The position of platforms is
+determined by the position of the player.
+[Play it on itch.io](https://averyhiebert.itch.io/you-are-a-strange-world).
 
-An experimental platformer made in 48 hours for the 2021 GMTK Game Jam, loosely inspired by the theme *Joined Together*.
-
-## Controls:
-
- - **←/→ or a/d** to move.
- - **↑/w/[space]/[shift]** to jump
-
-## Objective:
-
-Get to the gate to move to the next level.  There are 10 levels in total.
-
-For an extra challenge, try to rescue all three cats.
 
 ## Audio Credits:
 
