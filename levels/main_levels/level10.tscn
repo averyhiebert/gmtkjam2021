@@ -61,7 +61,7 @@ polygon = PoolVector2Array( -112, -280, -96, -280, -80, -280, -80, -272, -112, -
 
 [node name="Cat" parent="MovingPlatform/DeathZone" instance=ExtResource( 10 )]
 position = Vector2( -60, -224 )
-frame = 1
+frame = 0
 cat_name = "Alice"
 
 [node name="MovingPlatform2" type="Node2D" parent="."]
@@ -76,6 +76,7 @@ c = 1.0
 tile_data = PoolIntArray( -655359, 8, 0, -524287, 0, 196608, -524286, 0, 196610, -262146, 9, 1, -262145, 0, 196611, -196611, 9, 1, -196610, 0, 196611, -131075, 0, 196611, -4, 0, 196611, 65532, 9, 65536, 131072, 0, 196611 )
 
 [node name="DeathZone" parent="MovingPlatform2" instance=ExtResource( 7 )]
+disable_physics = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MovingPlatform2/DeathZone"]
 polygon = PoolVector2Array( -144, -16, -112, -16, -112, -8, -144, -8 )
@@ -89,5 +90,5 @@ target = ExtResource( 9 )
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 432 )
-[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
 [connection signal="moved" from="KinematicBody2D" to="MovingPlatform2" method="_on_KinematicBody2D_moved"]
+[connection signal="moved" from="KinematicBody2D" to="MovingPlatform" method="_on_KinematicBody2D_moved"]
